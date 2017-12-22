@@ -27,10 +27,9 @@ class Nginx():
     def servers(self):
         for config in self.configs():
             for ps in config['parsed']:
-                for p in ps:
-                    for block in p.get('block', []):
-                        if block.get('directive') == 'server':
-                            yield block
+                for block in ps.get('block', []):
+                    if block.get('directive') == 'server':
+                        yield block
 
 
 if __name__ == '__main__':
