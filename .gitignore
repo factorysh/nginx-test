@@ -4,3 +4,6 @@ include
 lib
 pip-selfcheck.json
 pyvenv.cfg
+lib64
+__pycache__
+share
