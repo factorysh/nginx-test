@@ -13,6 +13,12 @@ def errors(errors):
     raise n
 
 
+def find(haystack, directive):
+    for h in haystack:
+        if h['directive'] == directive:
+            yield h
+
+
 class Nginx():
 
     def __init__(self, path='/etc/nginx/nginx.conf'):
