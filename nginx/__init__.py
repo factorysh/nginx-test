@@ -15,7 +15,7 @@ def errors(errors):
 
 class Nginx():
 
-    def __init__(self, path):
+    def __init__(self, path='/etc/nginx/nginx.conf'):
         self.parse = crossplane.parse(path)
         if self.parse['status'] == 'failed':
             errors([cfg['errors'] for cfg in self.parse['config']])
