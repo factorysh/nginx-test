@@ -2,6 +2,10 @@ from . import find
 
 
 def test_ssl_everywhere(nginx):
+    """
+    For each server listening port 80,
+    one server listening port 443, with the same server_name is mandatory
+    """
     http = set()
     https = set()
     for server in nginx.servers():
@@ -21,6 +25,9 @@ def test_ssl_everywhere(nginx):
 
 
 def test_http2(nginx):
+    """
+    When listening 443, handle http2 too
+    """
     for server in nginx.servers():
         listen = find(server, 'listen').__next__()
         if '443' in listen['args']:
@@ -28,6 +35,9 @@ def test_http2(nginx):
 
 
 def test_hsts(nginx):
+    """
+    HSTS header in mandatory on port 443
+    """
     for server in nginx.servers():
         listen = find(server, 'listen').__next__()
         if '443' not in listen['args']:
