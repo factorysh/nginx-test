@@ -10,6 +10,8 @@ def test_ssl_everywhere():
         https = set()
         for server in nginx.servers():
             sn = find(server, 'server_name').__next__()['args']
+            if sn == ['_']:  # catch all server
+                continue
             listen = find(server, 'listen').__next__()
             if '443' in listen['args']:
                 for s in sn:
