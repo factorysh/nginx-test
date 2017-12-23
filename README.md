@@ -4,10 +4,13 @@ Nginx test
 Build a test file `test.py` :
 
 ```python
+from pytest import fixture
 from nginx import Nginx
-import nginx.test
 
-nginx.test.nginx = Nginx()
+
+@fixture
+def nginx():
+    return Nginx()
 
 from nginx.test import test_http2, test_ssl_everywhere, test_hsts
 ```
