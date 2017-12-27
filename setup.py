@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='nginx-test',
+    name='nginxtest',
     version='0.1.0',
     description='Check your Nginx config',
     url='https://github.com/factorysh/nginx-test',
@@ -17,9 +17,10 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     extras_require={
         'test': ['pytest', 'pytest-cov'],
+        'pex': ['pex'],
     },
     entry_points='''
     [console_scripts]
-    nginx-cli = nginx.cli:main
+    nginx-cli = nginxtest.cli:main
     ''',
 )
