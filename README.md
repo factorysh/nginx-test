@@ -19,6 +19,16 @@ Use pytest :
 
     py.test -v test.py
 
+CLI
+---
+
+build it:
+
+    make pex
+
+Use it:
+
+    ./nginx.pex
 
 Licence
 -------
