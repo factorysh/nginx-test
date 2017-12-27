@@ -7,3 +7,5 @@ pyvenv.cfg
 lib64
 __pycache__
 share
+*.pex
+wheelhouse/
