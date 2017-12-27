@@ -19,6 +19,12 @@ def find(haystack, directive):
             yield h
 
 
+def server_names(server):
+    for sn in find(server, 'server_name'):
+        for a in sn['args']:
+            yield a
+
+
 class Nginx():
 
     def __init__(self, path='/etc/nginx/nginx.conf'):
