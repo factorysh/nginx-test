@@ -1,19 +1,23 @@
-import sys
-from . import server_names, Nginx
+import click
+from . import server_names as sn
+from . import Nginx
 
 
-def main():
-    if sys.argv[1] == "server_name":
-        print("\n".join(show_server_names()))
+@click.group()
+def cli():
+    pass
 
 
-def show_server_names():
+@cli.command()
+@click.option('--regex/--no-regex', default=False)
+def server_names(regex=False):
     n = Nginx()
     names = set()
     for server in n.servers():
-        for name in server_names(server):
+        for name in sn(server):
+            if not regex and name.startswith('~'):
+                continue
             names.add(name)
-
     names = list(names)
     names.sort()
-    return names
+    print("\n".join(names))

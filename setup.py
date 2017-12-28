@@ -7,6 +7,7 @@ setup(
     url='https://github.com/factorysh/nginx-test',
     install_requires=[
         'crossplane',
+        'click',
     ],
     licence="BSD",
     classifiers=[
@@ -21,6 +22,6 @@ setup(
     },
     entry_points='''
     [console_scripts]
-    nginx-cli = nginxtest.cli:main
+    nginx-cli = nginxtest.cli:cli
     ''',
 )
