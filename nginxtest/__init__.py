@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 
 import crossplane
+from io import StringIO
 
 
 class NginxException(Exception):
     errors = []
+
+    def __str__(self):
+        buff = StringIO()
+        for error in self.errors:
+            line = error.get('line')
+            if line:
+                buff.write("Line %s\n" % line)
+            buff.write("\tError: %s\n" % error.get('error'))
+        return buff.getvalue()
 
 
 def errors(errors):
@@ -30,7 +40,11 @@ class Nginx():
     def __init__(self, path='/etc/nginx/nginx.conf'):
         self.parse = crossplane.parse(path)
         if self.parse['status'] == 'failed':
-            errors([cfg['errors'] for cfg in self.parse['config']])
+            err = NginxException()
+            for cfg in self.parse['config']:
+                for error in cfg['errors']:
+                    err.errors.append(error)
+            raise err
 
     def configs(self):
         for config in self.parse['config']:
